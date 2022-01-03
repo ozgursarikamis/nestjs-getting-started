@@ -8,8 +8,8 @@ export class StudentsController {
   }
 
   @Get('/:studentId')
-  getStudentById(@Param() parameters) {
-    console.log('studentId :>> ', parameters.studentId);
-    return `Get Student: ${parameters.studentId}`;
+  getStudentById(@Param() parameters: { studentId: string }) {
+    console.log('studentId :>> ', parameters);
+    return parameters;
   }
 }
