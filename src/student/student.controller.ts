@@ -7,9 +7,12 @@ export class StudentsController {
     return 'All Students';
   }
 
-  @Get('/:studentId')
-  getStudentById(@Param() parameters: { studentId: string }) {
-    console.log('studentId :>> ', parameters);
-    return parameters;
+  @Get('/:studentId/:teacherId')
+  getStudentById(
+    @Param('studentId') studentId: string,
+    @Param('teacherId') teacherId: number,
+  ) {
+    console.log('studentId :>> ', studentId, teacherId);
+    return { studentId, teacherId };
   }
 }
