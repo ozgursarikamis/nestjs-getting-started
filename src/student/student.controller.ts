@@ -1,6 +1,15 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  ParseUUIDPipe,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { CreateStudentDto, ResultDto, UpdateStudentDto } from './student.dto';
 import { StudentService } from './student.service';
+import { ValidationPipe } from './validation.pipe';
 
 @Controller('students')
 export class StudentsController {
@@ -13,8 +22,8 @@ export class StudentsController {
 
   @Get('/:studentId/:teacherId')
   getStudentById(
-    @Param('studentId') studentId: string,
-    @Param('teacherId') teacherId: number,
+    @Param('studentId', new ValidationPipe()) studentId: string,
+    @Param('teacherId', new ParseUUIDPipe()) teacherId: number,
   ) {
     console.log('studentId :>> ', studentId, teacherId);
     return { studentId, teacherId };
