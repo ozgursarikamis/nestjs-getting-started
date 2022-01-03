@@ -1,11 +1,14 @@
 import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { CreateStudentDto, ResultDto, UpdateStudentDto } from './student.dto';
+import { StudentService } from './student.service';
 
 @Controller('students')
 export class StudentsController {
+  constructor(private readonly service: StudentService) {}
+
   @Get()
   getStudents() {
-    return 'All Students';
+    return this.service.getStudents();
   }
 
   @Get('/:studentId/:teacherId')
